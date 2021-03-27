@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet" >
+	<!-- integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" -->
+	<link rel="icon" href="{{url_for('static',filename='img/favicon.ico')}}">
+    <title>Bot detector</title>
+	<style>
+	{% block style %}{% endblock %}	
+	body {
+		font-family: Georgia, serif;
+	}
+	#page-container {
+	  position: relative;
+	  min-height: 100vh;
+	}
+
+	#content-wrap {
+	  padding-bottom: 2.5rem;    /* Footer height */
+	}
+
+	#footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height:3rem;            /* Footer height */
+	}
+	.card {
+		box-shadow: -2px 2px #cccccc;
+	}
+	</style>
+  </head>
+  <body>
+	<div id="page-container">
+   <div id="content-wrap">
+<!-- Image and text -->
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="{{url_for('static',filename='img/logo.png')}}" alt="" width="38" height="24" class="d-inline-block align-top">
+      Bot Detector
+    </a>
+  </div>
+</nav>
+
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" style="color:white" aria-current="page" href="{{url_for('checkpg')}}">Check</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" style="color:white" href="{{url_for('search')}}">Search</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" style="color:white" href="{{url_for('about')}}">About</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" style="color:white" href="{{url_for('contact')}}">Contact Us</a>
+  </li>
+</ul>
+  </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+<br>
+<nav class="navbar navbar-dark bg-dark" id="footer">
+  <div class="container-fluid">
+  
+    <a class="navbar-brand" style="color:#888888;margin:auto" href="#">
+	
+      <b style="font-size:10pt">For more details mail us on prmane03@gmail.com</b>
+	  
+    </a>
+	
+  </div>
+</nav>  
+    
+    <script src=" {{url_for('static',filename='js/bootstrap.bundle.min.js')}}" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+	</div>
+ </div>
+  </body>
+</html>

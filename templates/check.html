@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block style %}
+.bar {
+	 background-image: linear-gradient(to left,#FF0000,#FF3300,#ff6600,#ff9900,#FFCC00,#FFFF00,#ccff00,#99ff00,#66ff00,#33ff00,#00FF00);
+}
+.bar[value] {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+{% endblock %}
+{% block body %}
+<div class="row m-2 p-3" style="border: 1px solid black;background-color:#f2f2f2">
+	<div class="row m-1">
+		<form class="d-flex" action="/check" method="POST">
+			<input class="form-control me-2" type="search" placeholder="Enter ScreenName" aria-label="Search" name="scrnm" required>
+			<button class="btn btn-dark" type="submit">Check</button>
+		</form>
+	</div>
+	
+	{% if error %}
+		<hr>
+		<br>
+		<h3 style="color:red">Got Error : {{error}}</h3>
+	{% endif %}
+	{% if data %}
+		<hr>
+		<div class="row m-1">
+			<div class="card col-xs-2 col-md-2 col-lg-2 p-1">
+				<img src="{{data.profile_img | replace('normal','400x400')}}" class="card-img-top" alt="Usr Img" style="border-radius: 5%;">
+				<div class="card-body">
+					<p class="card-text">{{data['user_name']}}</p>
+				</div>
+			</div>
+			<div class="card p-2 col-xs-5 col-md-5 col-lg-5">
+				<div class="card-body">
+					<b>Name :</b> {{data['user_name']}} {% if data['verified'] %}<img src="{{url_for('static',filename='img/verified.png')}}" height="18px" width="18px">{% endif %}<br>
+					<b>ScreenName :</b> {{data['screen_name']}}<br>
+					<b>Description :</b> {{data['description']}} <br>
+					<b>Creation Date :</b> {{data['created_at']}} <br>
+					{% if data.verified %}
+						<b style="color:Green">User is Veified</b>
+					{% else %}
+						<b style="color:brown">User is Not Veified</b>
+					{% endif %}
+				</div>
+			</div>
+	  
+		{% if result %}
+			<div class="card p-2 col-xs-5 col-md-5 col-lg-5">
+			<center>
+				<h4>Results</h4>
+				{% if "Bot" in result[0] %}
+					<b style="color:red">{{result[0]}}</b>
+				{% else %}
+					<b style="color:green">{{result[0]}}</b>
+				{% endif %}
+				<br>
+				<b style="color:red">being bot is {{"%.2f"|format(result[1][0][0]*100)}}%</b>
+				<br>
+				<b style="color:green">being human is {{"%.2f"|format(result[1][0][1]*100)}}%</b>
+				<div class="progress bar">
+					<div class="progress-bar bg-light" style="width: {{result[1][0][0]*100}}%;color:black;"> 
+					</div>
+					<b>| &#8592; {{"%.2f"|format(result[1][0][1]*100)}}%  </b>
+				</div> 
+				{% if result[2] %}
+					<hr>
+					<b>Analysing tweets</b>
+					<div class="progress bar">
+						<div class="progress-bar bg-light" style="width: {{100-result[2]*100}}%;color:black;"> 
+						</div>
+						<b>| &#8592; {{"%.2f"|format(result[2]*100)}}%</b>
+					</div>
+				{% else %}
+					<p>Not Enough Tweets Got To Analyse</p>
+				{% endif %}
+				<hr>
+				{% if result[3] %}
+					<b>Sentimental Scores</b>
+					<div class="progress">
+						<div class="progress-bar bg-success" role="progressbar" style="width:{{ result[3]['pos']*100 }}%">
+							({{"%.2f"|format(result[3]["pos"]*100)}}%) - Positive
+						</div>
+						<div class="progress-bar bg-warning" role="progressbar" style="width:{{ result[3]['neu']*100 }}%">
+							({{"%.2f"|format(result[3]["neu"]*100)}}%) - Neutral
+						</div>
+						<div class="progress-bar bg-danger" role="progressbar" style="width:{{ result[3]['neg']*100 }}%">
+							({{"%.2f"|format(result[3]["neg"]*100)}}%) - Negative
+						</div>
+					</div>
+				{% endif %}
+				<br>
+			</center>
+			</div>
+		{% endif %}
+		</div>
+	{% endif %}
+	
+	
+{% if result[2] and data %}		
+    <div class="row m-1" style="height:600px">
+		<a class="twitter-timeline" data-width="100%" data-height="100%" href="https://twitter.com/{{data['screen_name']}}?ref_src=twsrc%5Etfw">
+		Tweets by {{data['screen_name']}}
+		</a>
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>
+	</div>
+	
+{% endif %}	
+ </div>
+  
+<!-- Simillar Accounts  -->
+{% if same_acc[4] %}
+<div class="row m-1 p-3" style="border: 1px solid black;color:#f2f2f2;background-color:#212529">
+	<center>
+		<h6>Simillar Accounts</h6>
+	</center>
+</div>
+<div class="row row m-2 p-1" style="border: 1px solid black;background-color:#f2f2f2">
+	<center>
+		<div class="card-group">
+		{% for i in range(5) %}	
+			<div class="card p-3" style="width: 18rem;">
+				<img src="{{same_acc[i].profile_image_url | replace('normal','400x400')}}" class="card-img-top" alt="Usr Img" style="border-radius: 5%;">
+				<div class="card-body">
+					<p class="card-text">
+					<a href="https://twitter.com/{{same_acc[i]['screen_name']}}" target="_blank" style="color: black;text-decoration: none;">{{same_acc[i].name}}</a>
+					{% if same_acc[i].verified %}<img src="{{url_for('static',filename='img/verified.png')}}" height="18px" width="18px">{% endif %} </p>
+					<p style="color:#aaaaaa">@{{same_acc[i].screen_name}}</p>
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</center>
+</div>
+{% endif %}
+{% endblock %}

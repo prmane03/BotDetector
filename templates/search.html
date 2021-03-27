@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block style %}
+<!-- img { -->
+	<!-- height:50px; -->
+	<!-- width:50px; -->
+<!-- } -->
+{% endblock %}
+{% block body %}
+
+
+<div class="row m-2 p-3" style="border: 1px solid black;background-color:#f2f2f2">
+    <div class="row m-1">
+    <form class="d-flex" action="/search" method="POST">
+        <input class="form-control me-2" type="search" placeholder="Enter User Name" aria-label="Search" name="usrnm" required>
+        <button class="btn btn-dark" type="submit">Search</button>
+    </form>
+    </div>
+</div>
+{% if data %}
+{% if data|length > 15 %}
+{% for i in range(15) %}
+<hr>
+<div class="row m-1" >
+    <div class="row m-1">
+	
+    <div class="card col-xs-2 col-md-2 col-lg-2 p-1">
+        <img src="{{data[i].profile_image_url | replace('normal','400x400')}}" class="card-img-top" alt="Usr Img" style="border-radius: 5%;"> 
+       <!-- <img src="twitter.com/{{data[i]['screen_name']}}/photo" class="card-img-top" alt="Usr Img" style="border-radius: 50%;"> -->
+    </div>
+	  <div class="card p-2 col-xs-10 col-md-10 col-lg-10">
+	  <div class="card-body">
+            <h6><a href="https://twitter.com/{{data[i]['screen_name']}}" target="_blank" style="color: black;text-decoration: none;">{{data[i]['name']}}</a>  
+			{% if data[i]['verified'] %}<img src="{{url_for('static',filename='img/verified.png')}}" height="18px" width="18px">{% endif %}</h6>
+			<p style="color:#aaaaaa">@{{data[i]['screen_name']}}</p>  
+			<b>{{data[i].description}}</b> <br>
+			<p style="color:brown">{{data[i]['created_at'].date()}}</p> <br>
+			
+        </div>
+	  </div>
+    </div>
+</div>
+{% endfor %}
+<hr>
+<center>
+<h5>Couldn't Find Account In List. <br> 
+<a href="https://twitter.com/search?q={{data[2]['name']}}&src=typeahead_click&f=user" target="_blank"> Click here </a>
+to Search Directly on Twitter </h5>
+</center>
+<hr>
+{% else %}
+{% for i in range(data|length) %}
+<hr>
+<div class="row m-1" >
+    <div class="row m-1">
+	
+    <div class="card col-xs-2 col-md-2 col-lg-2 p-1">
+        <img src="{{data[i].profile_image_url | replace('normal','400x400')}}" class="card-img-top" alt="Usr Img" style="border-radius: 5%;">
+      </div>
+	  <div class="card p-2 col-xs-10 col-md-10 col-lg-10">
+	  <div class="card-body">
+            <h6><a href="https://twitter.com/{{data[i]['screen_name']}}" target="_blank" style="color: black;text-decoration: none;">{{data[i]['name']}}  </a>
+			{% if data[i]['verified'] %}<img src="{{url_for('static',filename='img/verified.png')}}" height="18px" width="18px">{% endif %}</h6>
+			<p style="color:#aaaaaa">@{{data[i]['screen_name']}}</p>  
+			<b>{{data[i].description}}</b> <br>
+			<p style="color:brown">{{data[i]['created_at'].date()}}</p> <br>
+			
+        </div>
+	  </div>
+    </div>
+</div>
+{% endfor %}
+<hr>
+<center>
+<h5>Couldn't Find Account In List. <br> 
+<a href="https://twitter.com/search?q={{data[0]['name']}}&src=typeahead_click&f=user" target="_blank"> Click here </a>
+to Search Directly on Twitter </h5>
+</center>
+<hr>
+{% endif %}
+{% endif %}
+{% if error %}
+<div class="row m-2" style="border: 1px solid black;background-color:#f2f2f2">
+    <div class="row m-1">
+	
+    <div class="card col-2" style="width: 10rem;">
+        <img src="{{url_for('static',filename='defaultUser.png')}}" class="card-img-top" alt="Usr Img" style="border-radius: 50%;">
+      </div>
+	  <div class="card col-10" style="width: 80%;">
+	  <div class="card-body">
+            <b>Error {{error}}</b>
+        </div>
+	  </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
