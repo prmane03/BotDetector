@@ -3,4 +3,4 @@
 * User can search :mag_right: for twitter accounts. 
 
 ### preview
-![Output](https://github.com/prmane03/BotDetector/blob/main/Preview1.png?raw=true)
+![Output](https://github.com/prmane03/BotDetector/blob/main/preview1.png?raw=true)
