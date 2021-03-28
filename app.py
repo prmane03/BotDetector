@@ -224,7 +224,7 @@ def check():
             
             features1 = GetData(scrnm)
             if(gotData[0]):
-                with open('mod1x64.prm', 'rb') as file:
+                with open('mod1.prm', 'rb') as file:
                     clf = pickle.load(file)
                 print("first Prediction")
                 pred=clf.predict(features1)
@@ -234,7 +234,7 @@ def check():
             
             features2 = GetTfidfVector(scrnm)
             if(gotData[1]):
-                with open('mod2x64.prm', 'rb') as file:
+                with open('mod2.prm', 'rb') as file:
                     clf2 = pickle.load(file)
                 print("second Prediction")   
                 pred2 =clf2.predict(features2)
