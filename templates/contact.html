@@ -16,53 +16,53 @@ label {
   display: inline-block;
 }
 
-/* Style the submit button */
-input[type=submit] {
-  background-color: #000000;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  float: right;
-  width:20%;
-}
+<!-- /* Style the submit button */ -->
+<!-- input[type=submit] { -->
+  <!-- background-color: #000000; -->
+  <!-- color: white; -->
+  <!-- padding: 12px 20px; -->
+  <!-- border: none; -->
+  <!-- border-radius: 4px; -->
+  <!-- cursor: pointer; -->
+  <!-- float: right; -->
+  <!-- width:20%; -->
+<!-- } -->
 
-/* Style the container */
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
+<!-- /* Style the container */ -->
+<!-- .container { -->
+  <!-- border-radius: 5px; -->
+  <!-- background-color: #f2f2f2; -->
+  <!-- padding: 20px; -->
+<!-- } -->
 
-/* Floating column for labels: 25% width */
-.col-25 {
-  float: left;
-  width: 25%;
-  margin-top: 6px;
-}
+<!-- /* Floating column for labels: 25% width */ -->
+<!-- .col-25 { -->
+  <!-- float: left; -->
+  <!-- width: 25%; -->
+  <!-- margin-top: 6px; -->
+<!-- } -->
 
-/* Floating column for inputs: 75% width */
-.col-75 {
-  float: left;
-  width: 75%;
-  margin-top: 6px;
-}
+<!-- /* Floating column for inputs: 75% width */ -->
+<!-- .col-75 { -->
+  <!-- float: left; -->
+  <!-- width: 75%; -->
+  <!-- margin-top: 6px; -->
+<!-- } -->
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+<!-- /* Clear floats after the columns */ -->
+<!-- .row:after { -->
+  <!-- content: ""; -->
+  <!-- display: table; -->
+  <!-- clear: both; -->
+<!-- } -->
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .col-25, .col-75, input[type=submit] {
-    width: 100%;
-    margin-top: 0;
-  }
-}
+<!-- /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */ -->
+<!-- @media screen and (max-width: 600px) { -->
+  <!-- .col-25, .col-75, input[type=submit] { -->
+    <!-- width: 100%; -->
+    <!-- margin-top: 0; -->
+  <!-- } -->
+<!-- } -->
 {% endblock %}
 {% block body %}
 
@@ -87,26 +87,26 @@ input[type=submit] {
 <div class="container mt-3">
   <form action="/contact" method="POST">
     <div class="row">
-      <div class="col-25">
+      <div class="col-4">
         <label for="name">Name</label>
       </div>
-      <div class="col-75">
+      <div class="col-8">
         <input type="text" id="name" name="name" placeholder="Your name.." required>
       </div>
     </div>
     <div class="row">
-      <div class="col-25">
+      <div class="col-4">
         <label for="email">Email</label>
       </div>
-      <div class="col-75">
+      <div class="col-8">
         <input type="email" id="email" name="email" placeholder="Your Email address.." required>
       </div>
     </div>
     <div class="row">
-      <div class="col-25">
+      <div class="col-4">
         <label for="about">Reason</label>
       </div>
-      <div class="col-75">
+      <div class="col-8">
         <select id="about" name="about" required>
 			<option value="feedback">Feedback</option>
           <option value="suggestion">Suggestion</option>
@@ -116,17 +116,17 @@ input[type=submit] {
       </div>
     </div>
     <div class="row">
-      <div class="col-25">
+      <div class="col-4">
         <label for="message">Message</label>
       </div>
-      <div class="col-75">
+      <div class="col-8">
         <textarea id="message" name="message" placeholder="Write something.." style="height:200px" required></textarea>
       </div>
     </div>
 	
     <div class="row">
 	<center>
-      <input type="submit" value="Submit">
+     <button class="btn btn-dark" type="submit">Submit</button>
 	  </center>
     </div>
 	

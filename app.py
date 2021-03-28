@@ -243,6 +243,7 @@ def check():
                 print("1 stored")
                 result[3] = sentiment_scores(scrnm)
             print(result)
+            print("same_acc : ",same_acc)
             return render_template("check.html",data=data,same_acc=same_acc,error=None,result=result)
         except Exception as e:
             print("exceptuon : "+str(e))
