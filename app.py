@@ -106,7 +106,6 @@ def GetTfidfVector(scrnm):
         with open('vectorizer', 'rb') as file:
             Tfidf = pickle.load(file)
         x = Tfidf.transform(tweet_text)
-	print("below tfidf")
         x = pd.DataFrame(x.toarray(), columns=Tfidf.get_feature_names())
         gotData[1]=True
         return x
