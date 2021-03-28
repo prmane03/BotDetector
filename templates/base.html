@@ -5,9 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<!-- Load font awesome icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
     <!-- Bootstrap CSS -->
     <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet" >
-	<!-- integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" -->
+	
 	<link rel="icon" href="{{url_for('static',filename='img/favicon.ico')}}">
     <title>Bot detector</title>
 	<style>
@@ -38,36 +41,7 @@
   <body>
 	<div id="page-container">
    <div id="content-wrap">
-<!-- Image and text -->
-<!-- <nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="{{url_for('static',filename='img/logo.png')}}" alt="" width="38" height="24" class="d-inline-block align-top">
-      Bot Detector
-    </a>
-  </div>
-</nav>
 
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" style="color:white" aria-current="page" href="{{url_for('checkpg')}}">Check</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" style="color:white" href="{{url_for('search')}}">Search</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" style="color:white" href="{{url_for('about')}}">About</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" style="color:white" href="{{url_for('contact')}}">Contact Us</a>
-  </li>
-</ul>
-  </div>
-</nav> -->
-
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#2982BD">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
