@@ -91,7 +91,7 @@ def GetTweets(scrnm):
                 tweet_text.remove(sent)
             else:
                 continue
-        print("no of tweets = ",len(tweet_text))
+        #print("no of tweets = ",len(tweet_text))
         if(len(tweet_text)>30):
             gotData[1]=True
             return tweet_text;
@@ -105,7 +105,9 @@ def GetTfidfVector(scrnm):
         #Tfidf = TfidfVectorizer(analyzer=CleanText)
         with open('vectorizer', 'rb') as file:
             Tfidf = pickle.load(file)
+	print("above tfidf")
         x = Tfidf.transform(tweet_text)
+	print("below tfidf")
         x = pd.DataFrame(x.toarray(), columns=Tfidf.get_feature_names())
         gotData[1]=True
         return x
