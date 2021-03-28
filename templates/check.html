@@ -10,11 +10,11 @@
 }
 {% endblock %}
 {% block body %}
-<div class="row m-2 p-3" ">
+<div class="row m-2 p-3">
 	<div class="row m-1">
 		<form class="d-flex" action="/check" method="POST">
 			<input class="form-control me-2" type="search" placeholder="Enter ScreenName" aria-label="Search" name="scrnm" required>
-			<button class="btn btn-dark" type="submit">Check</button>
+			<button class="btn" type="submit" style="background-color:#2982BD;color:white">Check</button>
 		</form>
 	</div>
 	
@@ -97,18 +97,16 @@
 		</div>
 	{% endif %}
 	
-	
 {% if result[2] and data %}		
     <div class="row m-1" style="height:600px">
 		<a class="twitter-timeline" data-width="100%" data-height="100%" href="https://twitter.com/{{data['screen_name']}}?ref_src=twsrc%5Etfw">
 		Tweets by {{data['screen_name']}}
 		</a>
 		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"/>
-	</div>
-	
+	</div>	
 {% endif %}	
- </div>
-  
+
+</div>
 <!-- Simillar Accounts  -->
 {% if same_acc[4] %}
 <div class="row m-1 p-3" style="border: 1px solid black;color:#f2f2f2;background-color:#212529">

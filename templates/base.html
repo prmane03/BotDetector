@@ -67,7 +67,8 @@
   </div>
 </nav> -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#2982BD">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="{{url_for('static',filename='img/logo.png')}}" alt="" width="38" height="24" class="d-inline-block align-top">
@@ -79,17 +80,18 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
 		<a class="nav-link active" aria-current="page" href="{{url_for('checkpg')}}">Check</a>
-		<a class="nav-link" href="{{url_for('search')}}">Search</a>
-		<a class="nav-link" href="{{url_for('about')}}">About</a>
-		<a class="nav-link" href="{{url_for('contact')}}">Contact Us</a>
+		<a class="nav-link active" href="{{url_for('search')}}">Search</a>
+		<a class="nav-link active" href="{{url_for('about')}}">About</a>
+		<a class="nav-link active" href="{{url_for('contact')}}">Contact Us</a>
       </div>
     </div>
   </div>
 </nav>	
 {% block body %}
 {% endblock %}
-<br>
-<nav class="navbar navbar-light bg-light" id="footer">
+<!-- <nav class="navbar navbar-light bg-light" id="footer"> -->
+<nav class="navbar navbar-dark" style="background-color:#313031" id="footer">
+	
   <div class="container-fluid" style="overflow:hidden"> 
     <a class="navbar-brand" style="margin:auto" href="#">	
       <b style="font-size:10pt">For more details mail us on prmane03@gmail.com</b>	  

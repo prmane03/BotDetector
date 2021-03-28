@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 {% block style %}
-<!-- img { -->
-	<!-- height:50px; -->
-	<!-- width:50px; -->
-<!-- } -->
 {% endblock %}
 {% block body %}
 
@@ -12,7 +8,7 @@
     <div class="row m-1">
     <form class="d-flex" action="/search" method="POST">
         <input class="form-control me-2" type="search" placeholder="Enter User Name" aria-label="Search" name="usrnm" required>
-        <button class="btn btn-dark" type="submit">Search</button>
+        <button class="btn" style="background-color:#2982BD;color:white" type="submit">Search</button>
     </form>
     </div>
 </div>
@@ -25,7 +21,6 @@
 	
     <div class="card col-xs-2 col-md-2 col-lg-2 p-1">
         <img src="{{data[i].profile_image_url | replace('normal','400x400')}}" class="card-img-top" alt="Usr Img" style="border-radius: 5%;"> 
-       <!-- <img src="twitter.com/{{data[i]['screen_name']}}/photo" class="card-img-top" alt="Usr Img" style="border-radius: 50%;"> -->
     </div>
 	  <div class="card p-2 col-xs-10 col-md-10 col-lg-10">
 	  <div class="card-body">
