@@ -82,7 +82,7 @@ def GetTweets(scrnm):
     #print(i,"##",status.text)
         if(i>200):
             break;
-    print("in get tweets")
+    #print("in get tweets")
     if(len(tweet_text)>30):
         # tweet_text = [tweet.text for tweet in tweets]
         #removing retweets
@@ -121,7 +121,7 @@ def sentiment_scores(scrnm):
         SentScore["neg"] = sum([tweet["neg"] for tweet in sentiment_dict])/len(sentiment_dict)
         SentScore["neu"] = sum([tweet["neu"] for tweet in sentiment_dict])/len(sentiment_dict)
         SentScore["pos"] = sum([tweet["pos"] for tweet in sentiment_dict])/len(sentiment_dict)
-        print("This is Sentiments : ",SentScore)
+        #print("This is Sentiments : ",SentScore)
         return SentScore
     else:
         return 0;
@@ -154,7 +154,7 @@ def search():
 		      data = api.search_users(usrnm)
 		      return render_template("search.html",data=data,error=None)
 		except Exception as e:
-		      print("exception : ",e)
+		      #print("exception : ",e)
 		      return render_template("search.html",data=data,error=e)
 	else :
 		return render_template("search.html",data=None,error=None)
@@ -211,7 +211,7 @@ def check():
         try :
             user=api.get_user(scrnm)
             result=[None]*4
-            print("Got Screen Name : "+scrnm)
+            #print("Got Screen Name : "+scrnm)
             same_acc= api.search_users(user.name)
             data={
             'user_name':user.name,
@@ -226,24 +226,24 @@ def check():
             if(gotData[0]):
                 with open('mod1.prm', 'rb') as file:
                     clf = pickle.load(file)
-                print("first Prediction")
+                #print("first Prediction")
                 pred=clf.predict(features1)
                 result[0]=ResultStatement[pred[0]]
-                print("0 stored")
+                #print("0 stored")
                 result[1]=clf.predict_proba(features1)
             
             features2 = GetTfidfVector(scrnm)
             if(gotData[1]):
                 with open('mod2.prm', 'rb') as file:
                     clf2 = pickle.load(file)
-                print("second Prediction")   
+                #print("second Prediction")   
                 pred2 =clf2.predict(features2)
                 d = clf2.decision_function(features2)[0]
                 result[2]= 1 - (np.exp(d) / (1 + np.exp(d)))
-                print("1 stored")
+                #print("1 stored")
                 result[3] = sentiment_scores(scrnm)
-            print(result)
-            print("same_acc : ",same_acc[5])
+            #print(result)
+            #print("same_acc : ",same_acc[5])
             return render_template("check.html",data=data,same_acc=same_acc,error=None,result=result)
         except Exception as e:
             print("exceptuon : "+str(e))
