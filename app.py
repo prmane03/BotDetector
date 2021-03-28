@@ -1,5 +1,4 @@
 from flask import Flask,request, url_for, redirect, render_template
-import cred as mytapi
 import tweepy
 import time
 import datetime
@@ -23,8 +22,9 @@ nltk.download('stopwords')
 stopwords = nltk.corpus.stopwords.words('english')
 ps = nltk.PorterStemmer()
 gotData = [False,False,False]
-auth = tweepy.OAuthHandler(mytapi.consumer_key, mytapi.consumer_secret)
-auth.set_access_token(mytapi.access_token, mytapi.access_secret)
+
+auth = tweepy.OAuthHandler(os.environ['consumer_key'], os.environ['consumer_secret'])
+auth.set_access_token(os.environ['access_token'],os.environ['access_secret'])
 api = tweepy.API(auth)
 
 
