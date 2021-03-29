@@ -15,7 +15,6 @@ from email.mime.multipart import MIMEMultipart
 import math, random
 import string
 from nltk.stem.snowball import SnowballStemmer 
-  
 #the stemmer requires a language parameter 
 snow_stemmer = SnowballStemmer(language='english') 
 nltk.download('stopwords')
