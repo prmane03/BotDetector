@@ -14,6 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import math, random
 import string
+import os
 from nltk.stem.snowball import SnowballStemmer 
   
 #the stemmer requires a language parameter 
