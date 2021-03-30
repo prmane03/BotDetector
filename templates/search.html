@@ -74,18 +74,27 @@ to Search Directly on Twitter </h5>
 {% endif %}
 {% endif %}
 {% if error %}
-<div class="row m-2" style="border: 1px solid black;background-color:#f2f2f2">
+{% if error == "'str' object has no attribute 'search_users'"%}
+<!-- activate modal -->
+<script type="text/javascript">
+$(function() {
+	$('#signinmodal').modal('show');
+});
+</script>
+{% else %}
+<div class="row m-1" >
     <div class="row m-1">
 	
-    <div class="card col-2" style="width: 10rem;">
+    <div class="card col-xs-2 col-md-2 col-lg-2 p-1">
         <img src="{{url_for('static',filename='defaultUser.png')}}" class="card-img-top" alt="Usr Img" style="border-radius: 50%;">
       </div>
-	  <div class="card col-10" style="width: 80%;">
+	  <div class="card p-2 col-xs-10 col-md-10 col-lg-10">
 	  <div class="card-body">
-            <b>Error {{error}}</b>
+            <h3 style="color:red">Got Error : {{error}}</h3>
         </div>
 	  </div>
     </div>
 </div>
+{% endif %}
 {% endif %}
 {% endblock %}

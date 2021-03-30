@@ -19,9 +19,18 @@
 	</div>
 	
 	{% if error %}
+	{% if error == "'str' object has no attribute 'get_users'"%}
+	<!-- activate modal -->
+	<script>
+	$(function() {
+		$('#signinmodal').modal('show');
+	});
+	</script>
+	{% else %}
 		<hr>
 		<br>
 		<h3 style="color:red">Got Error : {{error}}</h3>
+	{% endif %}
 	{% endif %}
 	{% if data %}
 		<hr>

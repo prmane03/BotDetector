@@ -7,7 +7,8 @@
 
 	<!-- Load font awesome icons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
+	 <!-- adding jQuery -->
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap CSS -->
     <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet" >
 	
@@ -45,7 +46,8 @@
 <nav class="navbar navbar-expand-lg navbar-expand-sm navbar-expand-md navbar-dark" style="background-color:#2982BD">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="{{url_for('static',filename='img/logo.png')}}" alt="" width="29" height="24" class="d-inline-block align-top">
+      <!-- <img src="{{url_for('static',filename='img/logo.png')}}" alt="" width="29" height="24" class="d-inline-block align-top"> -->
+      <img src="{{url_for('static',filename='img/logo.png')}}" alt="" height="28">
       Bot Detector
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,11 +59,39 @@
 		<a class="nav-link active" href="{{url_for('search')}}">Search</a>
 		<a class="nav-link active" href="{{url_for('about')}}">About</a>
 		<a class="nav-link active" href="{{url_for('contact')}}">Contact Us</a>
-		<a class="nav-link active" href="{{url_for('signin')}}" target="_blank">SignIn</a>
+		<!-- <a class="nav-link active" href="{{url_for('signin')}}" target="_blank">SignIn</a> -->
+		<!-- Button trigger modal -->
+		<!-- <button type="button" class="btn" style="background-color:#2982BD;border:none;color:white" data-bs-toggle="modal" data-bs-target="#signinmodal"> -->
+		  <!-- SignIn -->
+		<!-- </button> -->
+		<button type="button" class="btn" style="background-color:#2982BD;border:none;color:white" onclick="$('#signinmodal').modal('show');">
+		  <img src="{{url_for('static',filename='img/signin.png')}}" alt="" height="32">
+		</button>
       </div>
     </div>
   </div>
 </nav>	
+
+<!-- Modal -->
+<div class="modal fade" id="signinmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+		<img src="{{url_for('static',filename='img/twitterlogo.png')}}" alt="" height="24">
+        <h5 class="modal-title" id="exampleModalLabel">Sign in with Twitter</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        In order to proceed you must login with your twitter account.
+      </div>
+      <div class="modal-footer">
+        <a class="nav-link active" href="{{url_for('signin')}}">
+		<button type="button" class="btn btn-primary">SignIn</button>
+		</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% block body %}
 {% endblock %}
 <!-- <nav class="navbar navbar-light bg-light" id="footer"> -->

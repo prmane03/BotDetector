@@ -86,16 +86,9 @@ def get_verification():
     print("auth.access_token_secret : ",auth.access_token_secret)
     db['access_token_key']=auth.access_token
     db['access_token_secret']=auth.access_token_secret
-    return flask.redirect(flask.url_for('start'))
-
-@app.route("/start")
-def start():
-    global api
-    #auth done, app logic can begin
     api = db['api']
+    return flask.redirect(flask.url_for('checkpg'))
 
-    #example, print your latest status posts
-    return flask.render_template("about.html")
 
 def GetData(scrnm):
             ipvect=[]
@@ -221,7 +214,7 @@ def search():
 		      return render_template("search.html",data=data,error=None)
 		except Exception as e:
 		      #print("exception : ",e)
-		      return render_template("search.html",data=data,error=e)
+		      return render_template("search.html",data=data,error=str(e))
 	else :
 		return render_template("search.html",data=None,error=None)
 
@@ -314,7 +307,7 @@ def check():
         except Exception as e:
             print("exceptuon : "+str(e))
             print(result)
-            return render_template("check.html",data=data,same_acc=same_acc,error=e,result=result)
+            return render_template("check.html",data=data,same_acc=same_acc,error=str(e),result=result)
         
 
 
