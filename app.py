@@ -23,22 +23,23 @@ nltk.download('stopwords')
 stopwords = nltk.corpus.stopwords.words('english')
 ps = nltk.PorterStemmer()
 gotData = [False,False,False]
-
-auth = tweepy.OAuthHandler(os.environ['consumer_key'], os.environ['consumer_secret'])
-auth.set_access_token(os.environ['access_token'],os.environ['access_secret'])
-api = tweepy.API(auth)
+auth = tweepy.OAuthHandler("fG2WoInquUXqZB5bG2BWvVSeb", "T2e6KSUoDs9g19FjpxKtRW0B9okz3SrAxYZd0vowymS6oNfkNv")
+# auth.set_access_token(os.environ['access_token'],os.environ['access_secret'])
+# api = tweepy.API(auth)
 
 
 app = Flask(__name__)
 
 CONSUMER_TOKEN='fG2WoInquUXqZB5bG2BWvVSeb'
 CONSUMER_SECRET='T2e6KSUoDs9g19FjpxKtRW0B9okz3SrAxYZd0vowymS6oNfkNv'
-CALLBACK_URL = 'http://thebotdetector.herokuapp.com/verify'
+CALLBACK_URL = 'http://127.0.0.1:5000/verify'
 session = dict()
 db = dict() #you can save these values to a database
+api=""
 
-@app.route("/login")
-def send_token():
+# @app.route("/login")
+@app.route("/signin")
+def signin():
     redirect_url= ''
     auth = tweepy.OAuthHandler(str(CONSUMER_TOKEN), 
         str(CONSUMER_SECRET), 
@@ -47,8 +48,9 @@ def send_token():
         #get the request tokens
         redirect_url= auth.get_authorization_url()
         print(redirect_url)
-        session['request_token']= (auth.request_token.key,
-            auth.request_token.secret)
+        # session['request_token']= (auth.request_token.key,
+            # auth.request_token.secret)
+        session['request_token']= auth.request_token
     except tweepy.TweepError:
         print ('Error! Failed to get request token')
     #this is twitter's url for authentication
@@ -56,37 +58,44 @@ def send_token():
 
 @app.route("/verify")
 def get_verification():
+    global api
+    #get the verifier key from the request url
+    verifier= request.args['oauth_verifier']
+    print("verifier : ",verifier)
+    auth = tweepy.OAuthHandler(CONSUMER_TOKEN, CONSUMER_SECRET)
+    token = session['request_token']
+    del session['request_token']
+    print("token : ",token)
+    auth.request_token = { 'oauth_token' : token['oauth_token'],'oauth_token_secret' : token['oauth_token_secret']}
+    # auth.request_token = { 'oauth_token' : token[0],
+                          # 'oauth_token_secret' : token[1] }
+    # auth.request_token = token
+    # auth.set_request_token(token[0], token[1])
 
-	#get the verifier key from the request url
-	verifier= request.args['oauth_verifier']
+    try:
+            auth.get_access_token(verifier)
+    except tweepy.TweepError:
+            print ('Error! Failed to get access token.')
 
-	auth = tweepy.OAuthHandler(CONSUMER_TOKEN, CONSUMER_SECRET)
-	token = session['request_token']
-	del session['request_token']
+    #now you have access!
+    api = tweepy.API(auth)
 
-	auth.set_request_token(token[0], token[1])
-
-	try:
-		    auth.get_access_token(verifier)
-	except tweepy.TweepError:
-		    print ('Error! Failed to get access token.')
-
-	#now you have access!
-	api = tweepy.API(auth)
-
-	#store in a db
-	db['api']=api
-	db['access_token_key']=auth.access_token.key
-	db['access_token_secret']=auth.access_token.secret
-	return flask.redirect(flask.url_for('start'))
+    #store in a db
+    db['api']=api
+    print("auth.access_token : ",auth.access_token)
+    print("auth.access_token_secret : ",auth.access_token_secret)
+    db['access_token_key']=auth.access_token
+    db['access_token_secret']=auth.access_token_secret
+    return flask.redirect(flask.url_for('start'))
 
 @app.route("/start")
 def start():
-	#auth done, app logic can begin
-	api = db['api']
+    global api
+    #auth done, app logic can begin
+    api = db['api']
 
-	#example, print your latest status posts
-	return flask.render_template('tweets.html', tweets=api.user_timeline())
+    #example, print your latest status posts
+    return flask.render_template("about.html")
 
 def GetData(scrnm):
             ipvect=[]
