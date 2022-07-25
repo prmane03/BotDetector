@@ -23,15 +23,15 @@ nltk.download('stopwords')
 stopwords = nltk.corpus.stopwords.words('english')
 ps = nltk.PorterStemmer()
 gotData = [False,False,False]
-auth = tweepy.OAuthHandler("fG2WoInquUXqZB5bG2BWvVSeb", "T2e6KSUoDs9g19FjpxKtRW0B9okz3SrAxYZd0vowymS6oNfkNv")
-# auth.set_access_token(os.environ['access_token'],os.environ['access_secret'])
+auth = tweepy.OAuthHandler(os.environ['access_token'], os.environ['access_secret'])
+# auth.set_access_token(,)
 # api = tweepy.API(auth)
 
 
 app = Flask(__name__)
 
-CONSUMER_TOKEN='fG2WoInquUXqZB5bG2BWvVSeb'
-CONSUMER_SECRET='T2e6KSUoDs9g19FjpxKtRW0B9okz3SrAxYZd0vowymS6oNfkNv'
+CONSUMER_TOKEN=os.environ['consumer_token']
+CONSUMER_SECRET=os.environ['consumer_secret']
 CALLBACK_URL = 'http://127.0.0.1:5000/verify'
 session = dict()
 db = dict() #you can save these values to a database
